@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Demo | Popup jQuery plugin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="../popup.min.js"></script>
+<link rel="stylesheet" href="../popup.min.css" type="text/css">
+<style>
+body{width: 700px;margin: 0px auto;}
+</style>
+</head>
+<body>
+<h1>Popup jQuery plugin</h1>
+<h2>Example using data-* attributes</h2>
+<a href="example.com/u/1" class="userPopup" data-user-name="johny" data-name="John" data-surname="Doe" data-age="25" data-address="NY">John Doe</a>
+<script>
+$(function(){$(".userPopup").popUp({
+        content: 'Informations about user {userName}.<br /> Name: {name} {surname} <br />Age: {age} <br /> Address: {address}',
+        useDataAttrs: true
+    });
+  });
+</script>
+
+<h2>Example using variable</h2>
+<a href="example.com" class="userPopup1" data-id="1">John Doe</a>
+<script>
+var userData = {1: {"userName": "johny", "name": "John", "surname": "Doe", "age": 25, "address": "NY"}};
+$(function(){$(".userPopup1").popUp({
+        content: 'Informations about user {userName}.<br /> Name: {name} {surname} <br />Age: {age} <br /> Address: {address}',
+        identificator: "id",
+        data: userData
+    });
+  });
+</script>
+
+<h2>Example creating repeatable content</h2>
+<span class="userPopup2" data-id="1">Hover me</span>
+<script>
+var userData1 = {1: {"usersCount": 2, "repeat": [{"userName": "johny", "name": "John", "surname": "Doe", "age": 25, "address": "NY"},{"userName": "foobar", "name": "Foo", "surname": "Bar", "age": 25, "address": "foobar"}]}};
+$(function(){$(".userPopup2").popUp({
+        content: 'Informations about users. There are {usersCount} users.<table><tr><th>Name</th><th>Surname</th><th>Age</th><th>Address</th></tr>{repeat}</table>',
+        contentRepeat: '<tr><td>{name}</td><td>{surname}</td><td>{age}</td><td>{address}</td></tr>',
+        identificator: "id",
+        data: userData1
+    });
+  });
+</script>
+</body>
+</html>
